@@ -5,11 +5,11 @@ class GeocodeService
   def self.get_lat_and_lon_from_location(q)
     begin
       conn = build_connection(q)
-      response_handler(conn.get)
-    rescue Faraday::Response::RaiseError => e
-      logger.error "[error] Geocode Service error: #{e.response[:status]}"
-      logger.error "[error] Geocode Service error: #{e.response[:body]}"
-      logger.error "[error] Geocode Service error: search performed with q=#{q}"
+      handle_response(conn.get)
+    rescue Faraday::Error => e
+      # logger.error "[error] Geocode Service error: #{e.response[:status]}"
+      # logger.error "[error] Geocode Service error: #{e.response[:body]}"
+      # logger.error "[error] Geocode Service error: search performed with q=#{q}"
 
       []
     end
@@ -17,13 +17,13 @@ class GeocodeService
 
   private
 
-  def handle_response(response)
+  def self.handle_response(response)
     return [] unless response.success? && response.body["items"].present?
 
     extract_lat_and_lon(response.body["items"].first)
   end
 
-  def logger
+  def self.logger
     @logger ||= Logger.new("#{Rails.root}/log/geoservice-api.log")
   end
 
@@ -31,7 +31,7 @@ class GeocodeService
     lat = location.dig("position", "lat")
     lon  = location.dig("position", "lng")
     
-    return [] if lat.nil? || long.nil?
+    return [] if lat.nil? || lon.nil?
 
     # Do some kind of caching with this
     # Make a low level cache.
@@ -51,7 +51,6 @@ class GeocodeService
       builder.params['limit'] = 1
       builder.params['apiKey'] = API_KEY
       builder.headers['Content-Type'] = 'application/json'
-      builder.use Faraday::Response::RaiseError
     end
   end
 end
