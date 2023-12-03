@@ -5,26 +5,39 @@ class GeocodeService
   def self.get_lat_and_lon_from_location(q)
     begin
       conn = build_connection(q)
-      response = conn.get
-      
-      if response.success? && response.body["items"].present?
-        extract_lat_and_lon(response.body["items"].first)
-      else
-        raise Faraday::Error
-      end
-    rescue Faraday::Error => e
+      response_handler(conn.get)
+    rescue Faraday::Response::RaiseError => e
       logger.error "[error] Geocode Service error: #{e.response[:status]}"
-      logger.error "[error] Geocode Service error: #{e.response[:headers]}"
       logger.error "[error] Geocode Service error: #{e.response[:body]}"
-      logger.error "[error] Geocode Service error: #{e.response[:request][:url_path]}"
-      raise e
+      logger.error "[error] Geocode Service error: search performed with q=#{q}"
+
+      []
     end
   end
 
   private
 
+  def handle_response(response)
+    return [] unless response.success? && response.body["items"].present?
+
+    extract_lat_and_lon(response.body["items"].first)
+  end
+
+  def logger
+    @logger ||= Logger.new("#{Rails.root}/log/geoservice-api.log")
+  end
+
   def self.extract_lat_and_lon(location)
-    lat, lon = location.dig("position", "lat"), location.dig("position", "lng")
+    lat = location.dig("position", "lat")
+    lon  = location.dig("position", "lng")
+    
+    return [] if lat.nil? || long.nil?
+
+    # Do some kind of caching with this
+    # Make a low level cache.
+    postal_code = location.dig("address", "postalCode")
+
+    [lat, lon]
   end
 
   def self.build_connection(q)

@@ -1,9 +1,9 @@
 = form_with url: '/search', method: :get do |form|
-  = form.label :query, 'Address:'
-  = form.text_field :query
+  = form.label :query, 'Type in an address'
+  = form.text_field :query, required: true, placeholder: 'e.g. 123 Apple Cherry Street, Chicago IL, 60131', style: 'width: 100%;'
   = form.submit "Get Forecast"
 
-- if @weather
+- if @weather.present?
   %div
     %p
       = @weather["lat"]

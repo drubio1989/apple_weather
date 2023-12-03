@@ -6,6 +6,10 @@ class ForecastService
     begin
       conn = build_connection(lat, lon, exclude)
       response = conn.get
+
+      if response.success? 
+        response.body
+      end
     rescue Faraday::Error => e
 
       raise e
