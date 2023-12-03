@@ -1,0 +1,4 @@
+= form_with url: '/search', method: :get do |form|
+  = form.label :query, 'Address:'
+  = form.text_field :query
+  = form.submit "Get Forecast"
