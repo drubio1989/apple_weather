@@ -1,35 +1,10 @@
 = form_with url: '/search', method: :get do |form|
   = form.label :query, 'Enter an address'
-  = form.text_field :query, required: true, placeholder: 'e.g. 123 Apple Cherry Street, Chicago IL, 60131', style: 'width: 100%;'
+  = form.text_field :query, required: true, placeholder: 'e.g. 123 Apple Cherry Street, Chicago IL, 60131', style: 'width: 100%;', value: params[:query]
   = form.submit "Get Forecast"
 
 - if @weather.present?
   %div
-    -# %p
-    -#   = @weather["lat"]
-    -# %p
-    -#   = @weather["lon"]
-    -# %p
-    -#   = @weather["timezone"]
-    -# %p
-    -#   = @weather["timezone_offset"]
-    -# %p
-    -#   = @weather["timezone_offset"]
-    -# %p
-    -#   = @weather["current"]["dt"]
-    -# %p
-    -#   = @weather["current"]["sunset"]
-    -# %p
-    -#   = @weather["current"]["sunrise"]
-    -# %p
-    -#   = @weather["current"]["temp"]
-    -# %p
-    -#   = @weather["current"]["feels_like"]
-    -# %p
-    -#   = @weather["current"]["presssue"]
-    -# %p
-    -#   = @weather["current"]["humidity"]
-    -# %p
-    -#   = @weather["current"]["dew_point"]
-    -# %p
-    -#   = @weather["current"]["uvi"]
+    %p
+      = @weather.to_yaml
+  

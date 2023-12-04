@@ -1,14 +1,14 @@
 class ForecastController < ApplicationController
   def search
     q = params[:query]
-    zipcode = GeocodeService.get_zipcode_from_location(q)
+    zip_code = GeocodeService.get_zip_code_from_location(q)
     
-    if zipcode.nil?
+    if zip_code.nil?
       redirect_to root_path, alert: "Failed to locate the provided address. Please try again." 
       return
     end
 
-    @weather = ForecastService.get_forecast(zipcode)
+    @weather = ForecastService.get_forecast(zip_code)
 
     if @weather.nil?
       redirect_to root_path, alert: "Could not retrieve the current forecast for #{q}. Please try again later." 
