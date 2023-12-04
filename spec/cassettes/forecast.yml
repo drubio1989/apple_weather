@@ -1,0 +1,155 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://api.weatherstack.com/current?access_key=54c4c9d170a81a1ae61c5c7c915e56ca&query=37203&units=f
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v2.7.12
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 04 Dec 2023 08:39:43 GMT
+      Content-Type:
+      - application/json; Charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Apilayer-Transaction-Id:
+      - 81ea4eb2-6786-4b06-a5df-baf69f224bc0
+      Access-Control-Allow-Methods:
+      - GET, HEAD, POST, PUT, PATCH, DELETE, OPTIONS
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Request-Time:
+      - '0.140'
+      Cf-Cache-Status:
+      - DYNAMIC
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=8qS5ILQo0HVXayubWuzq113Kd856G5osWycXD8EVqy30fATqpCd2Hx%2Bfq%2BsldGdLYziCvTOQJvLfT%2Fuya2JWr0mex8UsRuX4IhoOEwkLMA%2Fv8we7Qjtr%2B7tHskm9hsTXXpR8Jp%2FK"}],"group":"cf-nel","max_age":604800}'
+      Nel:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8302bd907a6f475d-DFW
+    body:
+      encoding: ASCII-8BIT
+      string: '{"request":{"type":"Zipcode","query":"37203","language":"en","unit":"f"},"location":{"name":"Nashville","country":"USA","region":"Tennessee","lat":"36.156","lon":"-86.789","timezone_id":"America\/Chicago","localtime":"2023-12-04
+        02:34","localtime_epoch":1701657240,"utc_offset":"-6.0"},"current":{"observation_time":"08:34
+        AM","temperature":43,"weather_code":122,"weather_icons":["https:\/\/cdn.worldweatheronline.com\/images\/wsymbols01_png_64\/wsymbol_0004_black_low_cloud.png"],"weather_descriptions":["Overcast"],"wind_speed":2,"wind_degree":10,"wind_dir":"N","pressure":1012,"precip":0,"humidity":82,"cloudcover":100,"feelslike":41,"uv_index":1,"visibility":10,"is_day":"no"}}'
+  recorded_at: Mon, 04 Dec 2023 08:39:43 GMT
+- request:
+    method: get
+    uri: https://geocode.search.hereapi.com/v1/geocode?apiKey=bQWmAQnmUYoGT15I4Lmomw7-Xk_UF3Oaoo0wKwLuGS0&limit=1&q=1234%20Apple%20Street,%20Waco%20TX
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v2.7.12
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Cache-Control:
+      - no-store, must-revalidate
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 04 Dec 2023 08:39:43 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - openresty
+      Strict-Transport-Security:
+      - max-age=8640000; includeSubDomains
+      X-Correlation-Id:
+      - 13bac73f-9606-40dd-8d11-6d1218cb45ad
+      X-Request-Id:
+      - REQ-e26ca585-fcaa-470d-9283-2cbb48ae2f54
+      Content-Length:
+      - '735'
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: '{"items":[{"title":"1234 Apple St, Dallas, TX 75204-6422, United States","id":"here:af:streetsection:dUQ8VzafqwRxWcht9q62nD:EAIaBDEyMzQ","resultType":"houseNumber","houseNumberType":"interpolated","address":{"label":"1234
+        Apple St, Dallas, TX 75204-6422, United States","countryCode":"USA","countryName":"United
+        States","stateCode":"TX","state":"Texas","county":"Dallas","city":"Dallas","district":"Baylor","street":"Apple
+        St","postalCode":"75204-6422","houseNumber":"1234"},"position":{"lat":32.79568,"lng":-96.78027},"access":[{"lat":32.79559,"lng":-96.78039}],"mapView":{"west":-96.78134,"south":32.79478,"east":-96.7792,"north":32.79658},"scoring":{"queryScore":0.81,"fieldScore":{"state":1.0,"streets":[1.0],"houseNumber":1.0}}}]}'
+  recorded_at: Mon, 04 Dec 2023 08:39:43 GMT
+- request:
+    method: get
+    uri: http://api.weatherstack.com/current?access_key=54c4c9d170a81a1ae61c5c7c915e56ca&query=75204-6422&units=f
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - Faraday v2.7.12
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 04 Dec 2023 08:39:44 GMT
+      Content-Type:
+      - application/json; Charset=UTF-8
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      X-Apilayer-Transaction-Id:
+      - dbb9b088-568c-4428-b36d-43e51d0b0d31
+      Access-Control-Allow-Methods:
+      - GET, HEAD, POST, PUT, PATCH, DELETE, OPTIONS
+      Access-Control-Allow-Origin:
+      - "*"
+      X-Request-Time:
+      - '0.227'
+      Cf-Cache-Status:
+      - DYNAMIC
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=tbFR0DJEwkSbX3Te6DFWmcm3FVIsW50y5xApNZfPmgjk%2BBFrKviFk9%2BHXPMxPfGg3%2BS0URddYiynsYKWCmJxJkwhjvK7QISBJ6Gh%2Fhz4%2FGi2Ft882EZbSEPOKPaap2gLzIXN%2FeSZ"}],"group":"cf-nel","max_age":604800}'
+      Nel:
+      - '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Cf-Ray:
+      - 8302bd948caa6c1a-DFW
+    body:
+      encoding: ASCII-8BIT
+      string: '{"request":{"type":"City","query":"Dallas, USA United States of America","language":"en","unit":"f"},"location":{"name":"Dallas","country":"USA
+        United States of America","region":"Texas","lat":"32.799","lon":"-96.789","timezone_id":"America\/Chicago","localtime":"2023-12-04
+        02:39","localtime_epoch":1701657540,"utc_offset":"-6.0"},"current":{"observation_time":"08:39
+        AM","temperature":50,"weather_code":113,"weather_icons":["https:\/\/cdn.worldweatheronline.com\/images\/wsymbols01_png_64\/wsymbol_0008_clear_sky_night.png"],"weather_descriptions":["Clear"],"wind_speed":7,"wind_degree":350,"wind_dir":"N","pressure":1018,"precip":0,"humidity":44,"cloudcover":0,"feelslike":46,"uv_index":1,"visibility":10,"is_day":"no"}}'
+  recorded_at: Mon, 04 Dec 2023 08:39:44 GMT
+recorded_with: VCR 6.2.0

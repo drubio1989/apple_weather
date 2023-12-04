@@ -9,8 +9,7 @@ class GeocodeService
         handle_response(conn.get)
       end
     rescue Faraday::Error => e
-      logger.error "[error] Geocode Service error: #{e.response[:status]}"
-      logger.error "[error] Geocode Service error: #{e.response[:body]}"
+      logger.error "[error] Geocode Service error: #{e.message}"
       logger.error "[error] Geocode Service error: search performed with q=#{q}"
 
       nil

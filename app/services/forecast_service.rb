@@ -14,8 +14,7 @@ class ForecastService
 
       { data: data, from_cache: from_cache }
     rescue Faraday::Error => e
-      logger.error "[error] Forecast Service error: #{e.response[:status]}"
-      logger.error "[error] Forecast Service error: #{e.response[:body]}"
+      logger.error "[error] Forecast Service error: #{e.message}"
       logger.error "[error] Forecast Service error: lookup performed with zip_code=#{zip_code}"
 
       { data: nil, from_cache: false}

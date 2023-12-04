@@ -10,7 +10,7 @@ class ForecastController < ApplicationController
     end
 
     @forecast = ForecastService.get_forecast(zip_code)
-
+    
     if @forecast[:data].nil?
       redirect_to root_path, alert: "Could not retrieve the current forecast for #{q}. Please try again later." 
       return
