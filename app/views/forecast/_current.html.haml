@@ -1,0 +1,23 @@
+.flex.justify-between
+  .flex.flex-col
+    %span.text-6xl.font-bold 
+      = "#{data["current"]["temperature"]}°F" 
+    %span.font-semibold.mt-1.text-gray-500 
+      = "Feels like #{data["current"]["feelslike"]}°F" 
+    %span.font-semibold.mt-1.text-gray-500 
+      = "#{data["location"]["name"]}, #{data["location"]["region"]}"
+    %span.font-semibold.mt-1.text-gray-500 
+      = "Local Time: #{DateTime.parse(data["location"]["localtime"]).strftime("%I:%M %p")}"
+    - data["current"]["weather_descriptions"].each do |description|
+      %span.font-semibold.mt-1.text-gray-500
+        = description
+    %span.font-semibold.mt-1.text-gray-500 
+      = "Wind Speed: #{(data["current"]["wind_speed"].to_i * 0.621371).round.to_s} miles/hr"
+    %span.font-semibold.mt-1.text-gray-500 
+      = "Humidity: #{data["current"]["humidity"]}%"
+    %span.font-semibold.mt-1.text-gray-500 
+      = "Cloud Cover: #{data["current"]["cloudcover"]}%"
+    %span.font-semibold.mt-1.text-gray-500 
+      = "Precipiation: #{(data["current"]["precip"].to_i / 25.4).to_s} inches"
+    %span.font-semibold.mt-1.text-gray-500 
+      = "UVIndex: #{data["current"]["uv_index"]}"

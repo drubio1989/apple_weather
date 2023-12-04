@@ -4,7 +4,7 @@ class GeocodeService
 
   def self.get_zip_code_from_location(q)
     begin
-      data = Rails.cache.fetch("geocode_#{q}", expires_in: 1.minute) do
+      data = Rails.cache.fetch("geocode_#{q}", expires_in: 30.minutes) do
         conn = build_connection(q)
         handle_response(conn.get)
       end

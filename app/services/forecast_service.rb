@@ -6,7 +6,7 @@ class ForecastService
     begin
       from_cache = true
 
-      data = Rails.cache.fetch("forecast_#{zip_code}", expires_in: 1.minute) do
+      data = Rails.cache.fetch("forecast_#{zip_code}", expires_in: 30.minutes) do
         from_cache = false 
         conn = build_connection(zip_code)
         handle_response(conn.get)
@@ -40,6 +40,7 @@ class ForecastService
       builder.adapter :net_http
 
       builder.params['query'] = zip_code
+      builder.params['units'] = 'f'
       builder.params['access_key'] = API_KEY
       builder.headers['Content-Type'] = 'application/json'
     end

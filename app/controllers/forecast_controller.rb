@@ -9,13 +9,13 @@ class ForecastController < ApplicationController
       return
     end
 
-    @forecast_data = ForecastService.get_forecast(zip_code)
+    @forecast = ForecastService.get_forecast(zip_code)
 
-    if @forecast_data[:data].nil?
+    if @forecast[:data].nil?
       redirect_to root_path, alert: "Could not retrieve the current forecast for #{q}. Please try again later." 
       return
     end
- 
+
     render "home/index"
   end
 end
