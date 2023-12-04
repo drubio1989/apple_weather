@@ -3,8 +3,14 @@
   = form.text_field :query, required: true, placeholder: 'e.g. 123 Apple Cherry Street, Chicago IL, 60131', style: 'width: 100%;', value: params[:query]
   = form.submit "Get Forecast"
 
-- if @weather.present?
-  %div
-    %p
-      = @weather.to_yaml
-  
+-# - if @forecast_data[:data].present?
+-#   - data = @forecast_data[:data]
+-#   %div
+-#     %p
+-#       = data["location"]["name"]
+-#       - if @forecast_data[:from_cache]
+-#         %div
+-#           %p
+-#             Woohoo
+
+    

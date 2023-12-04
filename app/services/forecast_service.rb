@@ -4,16 +4,21 @@ class ForecastService
 
   def self.get_forecast(zip_code)
     begin
-      Rails.cache.fetch("forecast_#{zip_code}", expires_in: 30.minutes) do
+      from_cache = true
+
+      data = Rails.cache.fetch("forecast_#{zip_code}", expires_in: 1.minute) do
+        from_cache = false 
         conn = build_connection(zip_code)
         handle_response(conn.get)
       end
+
+      { data: data, from_cache: from_cache }
     rescue Faraday::Error => e
       logger.error "[error] Forecast Service error: #{e.response[:status]}"
       logger.error "[error] Forecast Service error: #{e.response[:body]}"
       logger.error "[error] Forecast Service error: lookup performed with zip_code=#{zip_code}"
 
-      nil
+      { data: nil, from_cache: false}
     end
   end
 

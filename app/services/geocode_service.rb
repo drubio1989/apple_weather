@@ -4,8 +4,10 @@ class GeocodeService
 
   def self.get_zip_code_from_location(q)
     begin
-      conn = build_connection(q)
-      handle_response(conn.get)
+      data = Rails.cache.fetch("geocode_#{q}", expires_in: 1.minute) do
+        conn = build_connection(q)
+        handle_response(conn.get)
+      end
     rescue Faraday::Error => e
       logger.error "[error] Geocode Service error: #{e.response[:status]}"
       logger.error "[error] Geocode Service error: #{e.response[:body]}"
