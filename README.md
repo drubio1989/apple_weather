@@ -1,24 +1,29 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Special Note & Acknowledgement (Daniel Rubio)
 
-Things you may want to cover:
+Thank you for the interview assessment. I am very pleased to have
+had the chance to have applied for Apple. This was an interesting
+challenge and I look forward to discussing the application. Thank you.
 
-* Ruby version
+## Installation
 
-* System dependencies
+### Requirements
 
-* Configuration
+* ruby 3.2.2
+* rails 7.1.2
 
-* Database creation
+## Running the app
 
-* Database initialization
+1. bundle install
+2. .bin/dev
 
-* How to run the test suite
+## Caching
 
-* Services (job queues, cache servers, search engines, etc.)
+In order to test caching locally please execute the following:
 
-* Deployment instructions
+* rails dev:cache
 
-* ...
+## RSpec
+
+* rspec spec
