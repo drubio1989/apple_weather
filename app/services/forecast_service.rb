@@ -1,11 +1,13 @@
 class ForecastService
-  BASE_URL = "http://api.openweathermap.org/data/3.0/onecall".freeze
-  API_KEY = Rails.application.credentials.open_weather.access_key_id
+  FORECAST_BASE_URL = "http://api.weatherstack.com/current".freeze
+  API_KEY = Rails.application.credentials.weather_stack.access_key_id
 
-  def self.get_forecast(coordinates, exclude = %w[minutely hourly daily alerts])
+  def self.get_forecast(zip_code)
     begin
-      conn = build_connection('poop', exclude)
-      handle_response(conn.get)
+      return Rails.cache.fetch("forecast_#{zipcode}", expires_in: 30.minutes) do
+        conn = build_connection(zip_code)
+        handle_response(conn.get)
+      end
     rescue Faraday::Error => e
       # logger.error "[error] Forecast Service error: #{e.response[:status]}"
       # logger.error "[error] Forecast Service error: #{e.response[:body]}"
@@ -25,17 +27,15 @@ class ForecastService
     @logger ||= Logger.new("#{Rails.root}/log/forecast-service-api.log")
   end
 
-  def self.build_connection(coordinates, exclude)
-    Faraday.new(url: BASE_URL) do |builder|
+  def self.build_connection(zip_code)
+    Faraday.new(url: FORECAST_BASE_URL) do |builder|
       builder.request :json
       builder.request :url_encoded
       builder.response :json
       builder.adapter :net_http
 
-      builder.params['lat'] = coordinates.first
-      builder.params['lon'] = coordinates.last
-      builder.params['exclude'] = exclude.join(',')
-      builder.params['apiKey'] = API_KEY
+      builder.params['query'] = zip_code
+      builder.params['access_key'] = API_KEY
       builder.headers['Content-Type'] = 'application/json'
     end
   end

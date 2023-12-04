@@ -1,8 +1,8 @@
 class GeocodeService
-  BASE_URL = "https://geocode.search.hereapi.com/v1/geocode".freeze
+  GEOCODE_BASE_URL = "http://api.weatherstack.com/current".freeze
   API_KEY = Rails.application.credentials.here.access_key_id
 
-  def self.get_lat_and_lon_from_location(q)
+  def self.get_zipcode_from_location(q)
     begin
       conn = build_connection(q)
       handle_response(conn.get)
@@ -20,28 +20,20 @@ class GeocodeService
   def self.handle_response(response)
     return [] unless response.success? && response.body["items"].present?
 
-    extract_lat_and_lon(response.body["items"].first)
+    extract_zipcode(response.body["items"].first)
   end
 
   def self.logger
     @logger ||= Logger.new("#{Rails.root}/log/geoservice-api.log")
   end
 
-  def self.extract_lat_and_lon(location)
-    lat = location.dig("position", "lat")
-    lon  = location.dig("position", "lng")
-    
-    return [] if lat.nil? || lon.nil?
-
-    # Do some kind of caching with this
-    # Make a low level cache.
-    postal_code = location.dig("address", "postalCode")
-
-    [lat, lon]
+  def self.extract_zipcode(location)
+     zipcode_code = location.dig("address", "postalCode")
+     zipcode_code.nil? ? nil : zipcode
   end
 
   def self.build_connection(q)
-    Faraday.new(url: BASE_URL) do |builder|
+    Faraday.new(url: GEOCODE_BASE_URL) do |builder|
       builder.request :json
       builder.request :url_encoded
       builder.response :json
